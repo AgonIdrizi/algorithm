@@ -12,3 +12,12 @@ def fibs(num)
 	fib_arr
 end
 
+def fibs_rec(n)
+	if n <= 1
+		n
+	else
+		fibs_rec(n-1) + fibs_rec(n - 2)
+	end
+end
+
+puts fibs_rec(10)
