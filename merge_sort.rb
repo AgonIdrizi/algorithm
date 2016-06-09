@@ -5,7 +5,7 @@ def merge_sort(arr)
 	arr1 = arr[0, mid]
 	arr2 = arr[mid, arr.length]
 
-	sort_arr(arr1 = merge_sort(arr1), arr2 = merge_sort(arr2))
+	sort_arr(merge_sort(arr1), merge_sort(arr2))
 end
 
 def sort_arr(arr1, arr2)
