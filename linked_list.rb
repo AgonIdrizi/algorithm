@@ -70,12 +70,16 @@ class LinkedList
 		until new_last_node.next == node
 			new_last_node = @head.next
 		end
+		new_last_node.next = nil
 		@tail = new_last_node
 		size -= 1
 		node
 	end
 
-	def contains?
+	def contains?(value)
+		node = @head
+		until node.value = value
+			node = node.next
 	end
 
 	def find
