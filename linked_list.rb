@@ -10,6 +10,8 @@ end
 
 class LinkedList
 
+	attr_accessor :size
+
 	def initialize
 		@head = nil
 		@tail = nil
@@ -69,12 +71,35 @@ class LinkedList
 	end
 
 	def contains?(node_value)
-		current_node = @head
-		until current_node = @tail do
-			if current_node.value = node_value
+		return nil if @size < index
+		current_index = 0
+		node = @head
+		while current_index <= index
+			node = node.next
+			current_index += 1
+		end
+		node
+	end
+
+	def pop
+		node = @tail
+		new_last_node = @head
+		until new_last_node.next == node
+			new_last_node = @head.next
+		end
+		new_last_node.next = nil
+		@tail = new_last_node
+		size -= 1
+		node
+	end
+
+	def contains?(node_value)
+		node = @head
+		until node == @tail
+			if node.value = node_value
 				return true
 			end
-			current_node = current_node.next
+			node = node.next
 		end
 		return false
 	end
