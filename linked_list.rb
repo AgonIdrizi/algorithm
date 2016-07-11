@@ -70,17 +70,6 @@ class LinkedList
 		return_node
 	end
 
-	def contains?(node_value)
-		return nil if @size < index
-		current_index = 0
-		node = @head
-		while current_index <= index
-			node = node.next
-			current_index += 1
-		end
-		node
-	end
-
 	def pop
 		node = @tail
 		new_last_node = @head
@@ -104,7 +93,16 @@ class LinkedList
 		return false
 	end
 
-	def find
+	def find(data)
+		node = @head
+		until node == @tail do
+			if node.value == data
+				return node
+			else
+				node = node.next
+			end
+		end
+		return nil
 	end
 
 	def to_s
