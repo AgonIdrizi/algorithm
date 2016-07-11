@@ -10,7 +10,7 @@ end
 
 class LinkedList
 
-	attr_accessor :size
+	attr_accessor :size, :head, :tail
 
 	def initialize
 		@head = nil
@@ -55,7 +55,7 @@ class LinkedList
 
 	def at(index)
 		current_node = @head
-		for 0..index do
+		0..index do
 			current_node = current_node.next
 		end
 		current_node
@@ -108,7 +108,11 @@ class LinkedList
 	def to_s
 		string = ""
 		node = @head
-		string << "(#{node.value} -> " until node == @tail
+		loop do
+			string << "(#{node.value}) -> "
+			break if node == @tail
+			node = node.next
+		end
 		string << "(nil)"
 		string
 	end
@@ -119,3 +123,15 @@ class LinkedList
 	def remove_at
 	end
 end
+
+node1 = Node.new("node 1")
+node2 = Node.new("node 2")
+node3 = Node.new("node 3")
+
+list = LinkedList.new
+list.append(node1)
+list.append(node2)
+list.prepend(node3)
+puts list.size
+puts list.to_s
+puts list.contains?("hello")
