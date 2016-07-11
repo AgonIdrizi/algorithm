@@ -106,6 +106,11 @@ class LinkedList
 	end
 
 	def to_s
+		string = ""
+		node = @head
+		string << "(#{node.value} -> " until node == @tail
+		string << "(nil)"
+		string
 	end
 
 	def insert_at
