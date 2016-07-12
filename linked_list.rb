@@ -145,6 +145,7 @@ class LinkedList
 			return_node = current_node.next
 			current_node.next = return_node.next
 		end
+		@size -= 1
 		return_node
 	end
 end
