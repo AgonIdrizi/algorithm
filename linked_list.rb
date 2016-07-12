@@ -25,6 +25,7 @@ class LinkedList
 		else
 			@tail.next = node
 			@tail = node
+			@tail.next = nil
 		end
 		@size += 1
 	end
@@ -55,19 +56,10 @@ class LinkedList
 
 	def at(index)
 		current_node = @head
-		0..index do
+		index.times do
 			current_node = current_node.next
 		end
 		current_node
-	end
-
-	def pop
-		return_node = @tail
-		current_node = @head
-		current_node = current_node.next until current_node.next == return_node
-		@tail = current_node
-		size -= 1
-		return_node
 	end
 
 	def pop
@@ -78,14 +70,14 @@ class LinkedList
 		end
 		new_last_node.next = nil
 		@tail = new_last_node
-		size -= 1
+		@size -= 1
 		node
 	end
 
 	def contains?(node_value)
 		node = @head
-		until node == @tail
-			if node.value = node_value
+		until node == nil
+			if node.value == node_value
 				return true
 			end
 			node = node.next
@@ -95,11 +87,13 @@ class LinkedList
 
 	def find(data)
 		node = @head
-		until node == @tail do
+		index = 0
+		until node == nil do
 			if node.value == data
-				return node
+				return index
 			else
 				node = node.next
+				index += 1
 			end
 		end
 		return nil
@@ -117,21 +111,40 @@ class LinkedList
 		string
 	end
 
-	def insert_at
+	def insert_at(data, index)
+		if index >= @size
+			puts "Node doesn't exist"
+			return nil
+		end
+		node = @head
+		current_index = 0
+		until current_index == index do
+			node = node.next
+			current_index += 1
+		end
+		node.value = data
+		node
 	end
 
-	def remove_at
+	def remove_at(index)
+		if index >= @size
+			puts "Node doesn't exist"
+			return nil
+		end
+		if index == 0
+			current_node = @head
+			return_node = @head
+			@head = current_node.next
+		elsif index == (size - 1)
+			return_node = pop
+		else
+			current_node = @head
+			(index - 1).times do
+				current_node = current_node.next
+			end
+			return_node = current_node.next
+			current_node.next = return_node.next
+		end
+		return_node
 	end
 end
-
-node1 = Node.new("node 1")
-node2 = Node.new("node 2")
-node3 = Node.new("node 3")
-
-list = LinkedList.new
-list.append(node1)
-list.append(node2)
-list.prepend(node3)
-puts list.size
-puts list.to_s
-puts list.contains?("hello")
