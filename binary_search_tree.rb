@@ -15,4 +15,8 @@ class BuildTree
 	def initialize(data)
 		build_tree(data)
 	end
+
+	def build_tree(data)
+		
+	end
 end
