@@ -29,8 +29,12 @@ class BuildTree
 
 		node.value = (data[mid_data])
 		node.parent = mid_data unless node == @root_node
-		node.left_child = build_tree(data, left, mid_data-1)
-		node.right_child = build_tree(data, mid_data+1, right)
+		if node.value < node.parent.value
+			node.left_child = build_tree(data, left, mid_data-1)
+		end
+		if node.value > node.parent.value
+			node.right_child = build_tree(data, mid_data+1, right)
+		end
 
 		node
 	end
@@ -44,3 +48,6 @@ end
 
 tree_array = [1,2,3,4,5,6,7]
 tree = BuildTree.new(tree_array)
+puts tree.root_node.value
+puts tree.root_node.left_child.value
+puts tree.root_node.right_child.value
