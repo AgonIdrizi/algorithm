@@ -31,19 +31,6 @@ class BuildTree
 
 		current_node = @root_node
 
-		while true
-			if node.value >= current_node.value
-				if current_node.right_child == nil
-					current_node.right_child == node
-					node.parent == current_node
-					break
-				else
-					current_node = current_node.right_child
-				end
-			else
-				if current_node
-		end
-
 		
 		node.parent = mid_data unless node == @root_node
 		if node.value < node.parent.value
