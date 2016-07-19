@@ -19,31 +19,46 @@ class BuildTree
 		build_tree(data)
 	end
 
-	def build_tree(data, left=0, right=data.length-1)
-		return if left > right
+	private
 
-		mid_data = find_data_middle(left, right)
-		node = Node.new
-		node.value = (data[mid_data])
+	def build_tree(data)
+		data.each do |value|
+			node = build_node(value)
+			place_node(node)
+		end
 
+		data
+	end
+
+	def place_node(node, current_node = @root_node)
 		@root_node ||= node
 		return if node == @root_node
 
-		current_node = @root_node
-
-		
-		node.parent = mid_data unless node == @root_node
-		if node.value < node.parent.value
-			node.left_child = build_tree(data, left, mid_data-1)
+		if node.value < current_node.value
+			if current_node.left_child == nil
+				current_node.left_child = node
+				node.parent = current_node
+				return node
+			else
+				place_node(node, current_node.left_child)
+			end
+		else
+			if current_node.right_child == nil
+				current_node.right_child = node
+				node.parent = current_node
+				return node
+			else
+				place_node(node, current_node.right_child)
+			end
 		end
-		if node.value > node.parent.value
-			node.right_child = build_tree(data, mid_data+1, right)
-		end
 
-		node
 	end
 
-	private
+	def build_node(value)
+		node = Node.new
+		node.value = value
+		node
+	end
 
 	def find_data_middle(left, right)
 		left + (right - left) / 2
@@ -53,5 +68,9 @@ end
 tree_array = [1,2,3,4,5,6,7]
 tree = BuildTree.new(tree_array)
 puts tree.root_node.value
-puts tree.root_node.left_child.value
+puts tree.root_node.right_child.value
+puts tree.root_node.right_child.value
+puts tree.root_node.right_child.value
+puts tree.root_node.right_child.value
+puts tree.root_node.right_child.value
 puts tree.root_node.right_child.value
