@@ -67,10 +67,3 @@ end
 
 tree_array = [1,2,3,4,5,6,7]
 tree = BuildTree.new(tree_array)
-puts tree.root_node.value
-puts tree.root_node.right_child.value
-puts tree.root_node.right_child.value
-puts tree.root_node.right_child.value
-puts tree.root_node.right_child.value
-puts tree.root_node.right_child.value
-puts tree.root_node.right_child.value
