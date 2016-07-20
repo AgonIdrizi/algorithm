@@ -37,6 +37,23 @@ class BuildTree
 		return nil
 	end
 
+	def depth_first_search(value)
+		stack = []
+		visited = []
+
+		stack << @root_node
+
+		until stack.empty?
+			current_node = stack[0]
+			visited << current_node
+			return current_node if current_node.value == value
+			stack.shift if visited.include?(current_node.left_child) && visited.include?(current_node.right_child)
+			stack.unshift(current_node.left_child) if !current_node.left_child.nil? && !visited.include?(current_node.left_child)
+			stack.unshift(current_node.right_child) if !current_node.right_child.nil? && !visited.include?(current_node.right_child)
+		end
+		return nil
+	end
+
 	private
 
 	def build_tree(data)
@@ -83,3 +100,6 @@ tree_array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 tree = BuildTree.new(tree_array)
 node = tree.breadth_first_search(6345)
 puts node.nil? ? "The node was not found" : "The node was found"
+
+node1 = tree.depth_first_search(52)
+puts node1.nil? ? "The node was not found" : "The node was found"
