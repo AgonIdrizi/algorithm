@@ -54,6 +54,15 @@ class BuildTree
 		return nil
 	end
 
+	def dfs_rec(value, current_node = @root_node)
+		return current_node.value if current_node.value == value
+		result = dfs_rec(value, current_node.left_child) unless current_node.left_child.nil?
+		return result unless result.nil?
+		result = dfs_rec(value, current_node.right_child) unless current_node.right_child.nil?
+		return result unless result.nil?
+		nil
+	end
+
 	private
 
 	def build_tree(data)
@@ -103,3 +112,6 @@ puts node.nil? ? "The node was not found" : "The node was found"
 
 node1 = tree.depth_first_search(67)
 puts node1.nil? ? "The node was not found" : "The node was found"
+
+node2 = tree.dfs_rec(324)
+puts node2.nil? ? "The node was not found" : "The node was found"
