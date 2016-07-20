@@ -19,6 +19,24 @@ class BuildTree
 		build_tree(data)
 	end
 
+	def breadth_first_search(value)
+		current_node = nil
+		queue = []
+		visited = []
+
+		queue.unshift(@root_node)
+
+
+		until queue.empty?
+			current_node = queue.pop
+			visited << current_node
+			return current_node if current_node.value == value
+			queue.unshift(current_node.left_child) if !current_node.left_child.nil? && !visited.include?(current_node.left_child)
+			queue.unshift(current_node.right_child) if !current_node.right_child.nil? && !visited.include?(current_node.right_child)
+		end
+		return nil
+	end
+
 	private
 
 	def build_tree(data)
@@ -59,11 +77,9 @@ class BuildTree
 		node.value = value
 		node
 	end
-
-	def find_data_middle(left, right)
-		left + (right - left) / 2
-	end
 end
 
-tree_array = [1,2,3,4,5,6,7]
+tree_array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 tree = BuildTree.new(tree_array)
+node = tree.breadth_first_search(6345)
+puts node.nil? ? "The node was not found" : "The node was found"
