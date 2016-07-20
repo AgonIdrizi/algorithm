@@ -45,9 +45,9 @@ class BuildTree
 
 		until stack.empty?
 			current_node = stack[0]
-			visited << current_node
+			visited << current_node unless visited.include?(current_node)
 			return current_node if current_node.value == value
-			stack.shift if visited.include?(current_node.left_child) && visited.include?(current_node.right_child)
+			stack.shift if (visited.include?(current_node.left_child) || current_node.left_child.nil?) && (visited.include?(current_node.right_child) || current_node.right_child.nil?)
 			stack.unshift(current_node.left_child) if !current_node.left_child.nil? && !visited.include?(current_node.left_child)
 			stack.unshift(current_node.right_child) if !current_node.right_child.nil? && !visited.include?(current_node.right_child)
 		end
@@ -101,5 +101,5 @@ tree = BuildTree.new(tree_array)
 node = tree.breadth_first_search(6345)
 puts node.nil? ? "The node was not found" : "The node was found"
 
-node1 = tree.depth_first_search(52)
+node1 = tree.depth_first_search(67)
 puts node1.nil? ? "The node was not found" : "The node was found"
