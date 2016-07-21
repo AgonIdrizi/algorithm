@@ -1,3 +1,13 @@
+class board_square
+
+	attr_accessor :coordinates, :parent
+
+	def initialize
+		@coordinates = nil
+		@parent = nil
+	end
+end
+
 class Knight
 	def initialize
 	end
