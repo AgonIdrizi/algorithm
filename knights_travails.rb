@@ -22,6 +22,29 @@ class GameBoard
 end
 
 class Node
+
+	attr_accessor :value, :parent, :children
+
+	def initialize
+		@value = nil
+		@parent = nil
+		@children = []
+	end
+end
+
+class BuildTree
+
+	attr_accessor :root_node
+
+	def initialize
+		@root_node = nil
+		build_tree
+	end
+
+	private
+
+	def build_tree
+	end
 end
 
 
